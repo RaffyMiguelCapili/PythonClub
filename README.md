@@ -1,2 +1,2 @@
-# PythonClubW2022
+# PythonClub2022
 For assignment of IT-112
