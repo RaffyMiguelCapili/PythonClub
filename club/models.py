@@ -39,14 +39,24 @@ class MeetingMinutes(models.Model):
     class Meta:
         db_table='MeetingMinutes'
 
+class TypeResource(models.Model):
+    typeresourcename=models.CharField(max_length=255)
+    typeresourcedescription=models.CharField(max_length=255, null=True, blank=True)
+
+    def __str__(self):
+        return self.typeresourcename
+    
+    class Meta:
+        db_table='ResourceType'
 
 class Resource(models.Model):
     resourcename=models.CharField(max_length=255)
-    resourcetype=models.ForeignKey(MeetingMinutes, on_delete=models.DO_NOTHING)
+    resourcetype=models.ForeignKey(TypeResource, on_delete=models.DO_NOTHING)
     resourceurl=models.URLField()
     resourcedateentered=models.DateField()
     resourceuserid=models.ForeignKey(User, on_delete=models.DO_NOTHING)
     resourcedescription=models.TextField(null=True, blank=True)
+
 
     def __str__(self):
         return self.resourcename
@@ -54,6 +64,7 @@ class Resource(models.Model):
     class Meta:
         db_table='Resource'
 
+    
 
 class Event(models.Model):
     eventtitle=models.CharField(max_length=255)

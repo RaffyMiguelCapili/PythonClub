@@ -1,0 +1,9 @@
+{% extends 'base.html'%}
+{% block content %}
+<h2>Members</h2>
+<ul>
+    {% for m in members_list  %}
+        <li>{{ m.resourcename }}</li>
+    {% endfor %}
+</ul>
+{% endblock %}
