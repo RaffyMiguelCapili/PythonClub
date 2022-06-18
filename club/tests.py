@@ -1,3 +1,4 @@
+from urllib import response
 from django.test import TestCase
 from django.contrib.auth.models import User
 
@@ -69,3 +70,15 @@ class NewMemberForm(TestCase):
         }
         form=ProductForm(data)
         self.assertFalse(form.is_valid)
+
+class New_Product_Authentication_Test(TestCase):
+    def setUp(self):
+        self.test_user=User.objects.create_user(username='testuser1', password='P@ssword1')
+        self.type=Type.objects.create(resourcetype='member')
+        self.product=Product.objects.create(resourcename='bob')
+
+    def test_redirect_if_not_logged_in(self):
+        response.self.client.get(reverse('newproduct'))
+        self.assertRedirects(response, 'account/login/?next=/club/newmember/')
+
+
