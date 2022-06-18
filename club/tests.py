@@ -1,7 +1,10 @@
 from django.test import TestCase
 from django.contrib.auth.models import User
+
+from club.forms import ProductForm
 from .models import Meeting, MeetingMinutes, TypeResource, Resource, Event
 import datetime
+import .forms import ProductForm
 
 # Create your tests here.
 
@@ -54,4 +57,15 @@ class MeetingMinutesTest(TestCase):
     def test_tablename(self):
         self.assertEqual(str(MeetingMinutes._meta.db_table), 'MeetingMinutes')
 
+class NewMemberForm(TestCase):
+    def test_memberform(self):
+        data={'resourcename':'Billy', 'resourcetype' :'member', 'user':'bob'
+        }
+        form=ProductForm(data)
+        self.assertTrue(form.is_valid)
 
+    def test_ProductForm_Invalid(self):
+         data={'resourcename':'Billy', 'resourcetype' :'member', 'user':'bob'
+        }
+        form=ProductForm(data)
+        self.assertFalse(form.is_valid)
